@@ -3,7 +3,7 @@
 - A Custom Swift Cache Object using LRU Algorithm
 
 ```swift
-public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
+public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
     /// configured with Double Linked-list.
     private class ListNode {
@@ -74,6 +74,9 @@ public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
         return node.value
     }
     
+    
+    /// Push your value and if there is same value, remove that automatically.
+    /// if not, remove Least Recently Used Node and push new node.
     public func setValue(value: Value, forKey key: Key) {
         let newNode = ListNode(key: key, value: value)
         if nodeDictionary.contains(where: { $0.key == key }){
@@ -82,12 +85,14 @@ public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
         } else {
             if nodeDictionary.count >= capacity {
                 guard let tailNode = tail.prevNode else { return }
-                remove(node: tailNode)
+                remove(node: tailNode) // remove Least Recently Used Node
             }
         }
         insertToHead(node: newNode)
     }
     
+    
+    /// Print values in Cache sorted by key
     public func description() {
         let values = nodeDictionary.sorted(by: {$0.0 < $1.0}).map{ $0.value }
         values.forEach({
