@@ -1,6 +1,7 @@
 # SwiftyLRUCache
 
-- A Custom Swift Cache Object using LRU Algorithm
+- Custom Swift Cache Object using LRU Algorithm
+- used Double Linked-list and Hash Map data structure
 
 ```swift
 public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
