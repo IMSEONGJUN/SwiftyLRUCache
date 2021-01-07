@@ -2,6 +2,8 @@
 
 - Custom Swift Cache Object using LRU Algorithm
 - used Double Linked-list and Hash Map data structure
+- Hash Map is for fast search
+- Double Linked-list is for more efficient insertion than Array and fast deletion with Hash Map
 
 ```swift
 public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
