@@ -5,6 +5,7 @@
 - Hash Map is for fast search
 - Double Linked-list is for more efficient insertion than Array and fast deletion with Hash Map
 
+
 ```swift
 public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
