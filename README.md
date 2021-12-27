@@ -2,7 +2,7 @@
 
 - Custom Swift Cache Object using LRU Algorithm
 - used Double Linked-list and Hash Map data structure
-- Hash Map is for fast search
+- Hash Map is for fast search to get a Node
 - Double Linked-list is for more efficient insertion than Array and fast deletion with Hash Map
 
 
@@ -80,17 +80,17 @@ public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
     
     /// Push your value and if there is same value, remove that automatically.
-    /// if not, remove Least Recently Used Node and push new node.
+    /// if not, and the capacity of LRUCache full, remove Least Recently Used Node and push new node.
     public func setValue(value: Value, forKey key: Key) {
         let newNode = ListNode(key: key, value: value)
+
         if nodeDictionary.contains(where: { $0.key == key }){
             guard let oldNode = nodeDictionary[key] else { return }
             remove(node: oldNode)
-        } else {
-            if nodeDictionary.count >= capacity {
-                guard let tailNode = tail.prevNode else { return }
-                remove(node: tailNode) // remove Least Recently Used Node
-            }
+            
+        } else if nodeDictionary.count >= capacity,
+                let tailNode = tail.prevNode {
+            remove(node: tailNode) // remove Least Recently Used Node
         }
         insertToHead(node: newNode)
     }
