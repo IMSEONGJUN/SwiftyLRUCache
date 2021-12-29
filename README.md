@@ -69,9 +69,6 @@ public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
     /// When the cache hit happen, remove the node what you get and insert to Head side again.
     public func getValue(forKey key: Key) -> Value? {
-        if !nodeDictionary.contains(where: { $0.key == key }) {
-            return nil
-        }
         guard let node = nodeDictionary[key] else { return nil }
         remove(node: node)
         insertToHead(node: node)
