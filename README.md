@@ -81,8 +81,7 @@ public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     public func setValue(value: Value, forKey key: Key) {
         let newNode = ListNode(key: key, value: value)
 
-        if nodeDictionary.contains(where: { $0.key == key }){
-            guard let oldNode = nodeDictionary[key] else { return }
+        if let oldNode = nodeDictionary[key] {
             remove(node: oldNode)
             
         } else if nodeDictionary.count >= capacity,
