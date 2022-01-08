@@ -4,6 +4,7 @@
 - used Double Linked-list and Hash Map data structure
 - Hash Map is for fast search to get a Node
 - Double Linked-list is for more efficient insertion than Array and fast deletion with Hash Map
+- and most important reason to use Double Linked-list is to find least recently used Node, that is to say the tail in Double Linked-list 
 
 
 ```swift
