@@ -87,6 +87,7 @@ public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
             
         } else if nodeDictionary.count >= capacity,
                 let tailNode = tail.prevNode {
+            nodeDictionary.removeValue(tailNode, forKey: tailNode.key)
             remove(node: tailNode) // remove Least Recently Used Node
         }
         insertToHead(node: newNode)
