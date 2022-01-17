@@ -28,7 +28,7 @@ public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     private var nodeDictionary = [Key: ListNode]()
     
     
-    /// ListNode's limit count.
+    /// Cache's limit count.
     private var capacity = 0
     
     
