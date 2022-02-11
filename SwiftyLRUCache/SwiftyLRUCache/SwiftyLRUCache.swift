@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
+public final class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
     /// configured with Double Linked-list.
     private class ListNode {
@@ -28,7 +28,7 @@ public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     private var nodeDictionary = [Key: ListNode]()
     
     
-    /// ListNode's limit count.
+    /// Cache's limit count.
     private var capacity = 0
     
     
@@ -70,29 +70,30 @@ public class SwiftyLRUCache<Key: Hashable, Value> where Key: Comparable {
     
     /// When the cache hit happen, remove the node what you get and insert to Head side again.
     public func getValue(forKey key: Key) -> Value? {
-        if !nodeDictionary.contains(where: { $0.key == key }) {
-            return nil
-        }
         guard let node = nodeDictionary[key] else { return nil }
         remove(node: node)
         insertToHead(node: node)
         return node.value
     }
     
+    
+    /// Push your value and if there is same value, remove that automatically.
+    /// if not, and the capacity of LRUCache full, remove Least Recently Used Node and push new node.
     public func setValue(value: Value, forKey key: Key) {
         let newNode = ListNode(key: key, value: value)
-        if nodeDictionary.contains(where: { $0.key == key }){
-            guard let oldNode = nodeDictionary[key] else { return }
+
+        if let oldNode = nodeDictionary[key] {
             remove(node: oldNode)
-        } else {
-            if nodeDictionary.count >= capacity {
-                guard let tailNode = tail.prevNode else { return }
-                remove(node: tailNode)
-            }
+            
+        } else if nodeDictionary.count >= capacity,
+                let tailNode = tail.prevNode {
+            remove(node: tailNode) // remove Least Recently Used Node
         }
         insertToHead(node: newNode)
     }
     
+    
+    /// Print values in Cache sorted by key
     public func description() {
         let values = nodeDictionary.sorted(by: {$0.0 < $1.0}).map{ $0.value }
         values.forEach({
