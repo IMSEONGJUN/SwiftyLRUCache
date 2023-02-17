@@ -1,6 +1,6 @@
 # SwiftyLRUCache
 
-- Custom Swift Cache Object using LRU Algorithm
+- Custom Swift Cache using LRU Algorithm
 - used Double Linked-list and Hash Map data structure
 - Hash Map is for fast search to find a Node
 - Double Linked-list is a storage for more efficient insertion than Array and fast deletion in the middle of Nodes with Hash Map
