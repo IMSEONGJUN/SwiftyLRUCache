@@ -4,7 +4,7 @@
 - Used Double Linked-list and Hash Map data structure
 - Hash Map(Dictionary) is for fast search to find a Node
 - Double Linked-list is a storage for more efficient insertion than Array and fast deletion in the middle of Nodes
-- Most important reason to use Double Linked-list is to find least recently used Node, that is to say the tail in Double Linked-list 
+- Most important reason to use Double Linked-list is to find least recently used Node, that is to say the tail Node in Double Linked-list 
 
 
 ```swift
